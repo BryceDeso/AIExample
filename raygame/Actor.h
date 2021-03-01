@@ -8,21 +8,24 @@ class Sprite;
 class Actor
 {
 public:
-    Actor() {}
+    Actor();
     ~Actor();
     /// <param name="x">Position on the x axis</param>
     /// <param name="y">Position on the y axis</param>
     /// <param name="icon">The symbol that will appear when drawn</param>
+    /// <param name="maxForce">The largest the magnitude of the force vector can be</param>
     Actor(float x, float y, float collisionRadius, char icon, float maxSpeed);
 
     /// <param name="x">Position on the x axis</param>
     /// <param name="y">Position on the y axis</param>
     /// <param name="icon">The symbol that will appear when drawn</param>
+    /// <param name="maxForce">The largest the magnitude of the force vector can be</param>
     Actor(float x, float y, float collisionRadius, Sprite* sprite, float maxSpeed);
 
     /// <param name="x">Position on the x axis</param>
     /// <param name="y">Position on the y axis</param>
     /// <param name="icon">The symbol that will appear when drawn</param>
+    /// <param name="maxForce">The largest the magnitude of the force vector can be</param>
     Actor(float x, float y, float collisionRadius, const char* spriteFilePath, float maxSpeed);
 
     bool getStarted() { return m_started; }
