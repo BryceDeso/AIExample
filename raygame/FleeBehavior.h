@@ -2,11 +2,11 @@
 #include "SteeringBehavior.h"
 class Actor;
 
-class SeekBehavior : public SteeringBehavior
+class FleeBehavior : public SteeringBehavior
 {
 public:
-	SeekBehavior();
-	SeekBehavior(Actor* target, float seekForce = 1 );
+	FleeBehavior();
+	FleeBehavior(Actor* target, float fleeForce = 1);
 
 	void setTarget(Actor* target) { m_target = target; }
 	Actor* getTarget() { return m_target; }
@@ -16,6 +16,6 @@ public:
 private:
 	//The agent the behavior is seeking.
 	Actor* m_target;
-	float m_seekForce;
+	float m_fleeForce;
 };
 

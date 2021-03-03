@@ -1,6 +1,10 @@
 #include "Game.h"
 #include "raylib.h"
 #include "Player.h"
+#include "Agent.h"
+#include "SeekBehavior.h"
+#include "FleeBehavior.h"
+#include "WanderBehavior.h"
 
 bool Game::m_gameOver = false;
 Scene** Game::m_scenes = new Scene*;
@@ -19,15 +23,27 @@ Game::Game()
 
 void Game::start()
 {
-	int screenWidth = 1024;
-	int screenHeight = 760;
+	int screenWidth = 1924;
+	int screenHeight = 960;
 
 	InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
 	m_camera->offset = { (float)screenWidth / 2, (float)screenHeight / 2 };
 	m_camera->target = { (float)screenWidth / 2, (float)screenHeight / 2 };
 	m_camera->zoom = 1;
-	Player* player = new Player(10, 10, 5, "Images/player.png", 1);
-	Actor* enemy = new Actor(20, 10, 5, "Images/enemy.png", 1);
+
+	//Initalizes player and enemy
+	Player* player = new Player(10, 10, 5, "Images/player.png", 2, 10);
+	Agent* enemy = new Agent(10, 10, 1, "Images/enemy.png", 1, 1);
+
+	//Creates new steeriong behavior then add it to enemy
+	SeekBehavior* seek = new SeekBehavior(player, 10000000);
+	FleeBehavior* flee = new FleeBehavior(player, 1);
+	WanderBehavior* wander = new WanderBehavior(player, 1);
+	//enemy->addBehavior(flee);
+	//enemy->addBehavior(seek);
+	enemy->addBehavior(wander);
+
+	//Adds player and enemy to scene while creating a new scene
 	Scene* scene = new Scene();
 	scene->addActor(player);
 	scene->addActor(enemy);

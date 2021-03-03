@@ -2,7 +2,7 @@
 #include "Behavior.h"
 #include <Vector2.h>
 
-class SteeringBeahvior : public Behavior
+class SteeringBehavior : public Behavior
 {
 public:
 	virtual MathLibrary::Vector2  calculateForce(Agent* agent) = 0;
