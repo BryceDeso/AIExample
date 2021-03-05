@@ -17,8 +17,9 @@ WanderBehavior::WanderBehavior(Actor* target, float maxForce)
 
 MathLibrary::Vector2 WanderBehavior::calculateForce(Agent* agent)
 {
+	//Initalizing circle distance and radius as well as random values used to copy wandering behavior.
 	float circleRadius = 10;
-	float circleDistance = 10000;
+	float circleDistance = 50;
 	float randomNumX = GetRandomValue(-50, 50);
 	float randomNumY = GetRandomValue(-50, 50);
 	MathLibrary::Vector2 circleCenter;
@@ -26,10 +27,11 @@ MathLibrary::Vector2 WanderBehavior::calculateForce(Agent* agent)
 	MathLibrary::Vector2 wanderAngle;
 	MathLibrary::Vector2 wanderForce;
 
-	circleCenter = agent->getForward();
+	//Setting the circle's center to agent's forward multiplied by circle's distance then normalized to move circle away from agent. 
+	circleCenter = m_target->getForward() * circleDistance;
 	circleCenter.normalize(circleCenter);
-	circleCenter = agent->getForward() * circleDistance;
 
+	//Setting displacementForce to the vector2 cordinat
 	displacementForce = MathLibrary::Vector2(0, -1);
 	displacementForce = displacementForce * circleRadius;
 	agent->setVelocity(MathLibrary::Vector2(randomNumX, randomNumY));
