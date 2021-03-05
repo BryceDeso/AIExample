@@ -17,27 +17,32 @@ WanderBehavior::WanderBehavior(Actor* target, float maxForce)
 
 MathLibrary::Vector2 WanderBehavior::calculateForce(Agent* agent)
 {
-	float wanderRadius = 10;
-	float wanderDistance = 5;
-	float wanderJitter = 1;
-	float randomNum = GetRandomValue(0, 20);
+	float circleRadius = 10;
+	float circleDistance = 10000;
+	float randomNumX = GetRandomValue(-50, 50);
+	float randomNumY = GetRandomValue(-50, 50);
+	MathLibrary::Vector2 circleCenter;
+	MathLibrary::Vector2 displacementForce;
+	MathLibrary::Vector2 wanderAngle;
+	MathLibrary::Vector2 wanderForce;
 
-	MathLibrary::Vector2::normalize(m_target->getWorldPosition()
+	circleCenter = agent->getForward();
+	circleCenter.normalize(circleCenter);
+	circleCenter = agent->getForward() * circleDistance;
 
-	//Find the direction ot move in.
-	MathLibrary::Vector2 direction = MathLibrary::Vector2::normalize(m_target->getWorldPosition() - agent->getWorldPosition());
+	displacementForce = MathLibrary::Vector2(0, -1);
+	displacementForce = displacementForce * circleRadius;
+	agent->setVelocity(MathLibrary::Vector2(randomNumX, randomNumY));
 
-	//Scale the direction vector by seekForce
-	MathLibrary::Vector2 desiredVelocity = direction * m_wanderForce;
+	wanderAngle = MathLibrary::Vector2(randomNumX, randomNumY);
 
-	//Subtract current velocity from desired velocity to find steering force;
-	MathLibrary::Vector2 steeringForce = desiredVelocity - agent->getVelocity();
-	return steeringForce;
+	wanderForce = circleCenter + displacementForce;
+	return wanderForce;
 }
 
 void WanderBehavior::update(Agent* agent, float deltaTime)
 {
-	//IF agent isnt equal to null, calculate a new force and apply it.
+	//If agent isnt equal to null, calculate a new force and apply it.
 	if (agent)
 	{
 		agent->addForce(calculateForce(agent));
