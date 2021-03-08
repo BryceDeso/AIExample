@@ -13,6 +13,8 @@ bool Game::m_gameOver = false;
 Scene** Game::m_scenes = new Scene*;
 int Game::m_sceneCount = 0;
 int Game::m_currentSceneIndex = 0;
+int Game::m_screenWidth = 1924;
+int Game::m_screenHeight = 960;
 
 
 Game::Game()
@@ -26,12 +28,9 @@ Game::Game()
 
 void Game::start()
 {
-	int screenWidth = 1924;
-	int screenHeight = 960;
-
-	InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
-	m_camera->offset = { (float)screenWidth / 2, (float)screenHeight / 2 };
-	m_camera->target = { (float)screenWidth / 2, (float)screenHeight / 2 };
+	InitWindow(m_screenWidth, m_screenHeight, "raylib [core] example - basic window");
+	m_camera->offset = { (float)m_screenWidth / 2, (float)(m_screenHeight / 2 };
+	m_camera->target = { (float)m_screenWidth / 2, (float)(m_screenHeight / 2 };
 	m_camera->zoom = 1;
 
 	//Initalizes player and enemy

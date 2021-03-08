@@ -13,6 +13,7 @@ public:
 
 	MathLibrary::Vector2 calculateForce(Agent* agent) override;
 	void update(Agent* agent, float deltaTime) override;
+	void draw(Agent* agent) override;
 
 private:
 	Actor* m_target;

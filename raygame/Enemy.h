@@ -1,18 +1,19 @@
 #pragma once
-#include "Agent.h"
-class Enemy : public Agent
+#include "Character.h"
+class Enemy : public Character
 {
 public:
 	/// <param name="x">Position on the x axis</param>
 	/// <param name="y">Position on the y axis</param>
 	/// <param name="icon">The symbol that will appear when drawn</param>
-	Enemy(float x, float y, float collisionRadius, const char* spriteFilePath, Agent* target, float maxSpeed, float maxForce);
+	Enemy(float x, float y, float collisionRadius, const char* spriteFilePath, Actor* target, float health = 1, float damage = 1, float maxSpeed = 1, float maxForce = 1);
 
 	void update(float deltaTime) override;
 
-	void setTarget(Agent* agent) { m_target = agent; }
+	virtual void setTarget(Actor* target) { m_target = target; }
+	virtual Actor* getTarget(Actor* target) { return target; }
 
 private:
-	Agent* m_target;
+	Actor* m_target;
 };
 

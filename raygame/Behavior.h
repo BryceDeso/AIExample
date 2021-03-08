@@ -6,5 +6,6 @@ class Behavior
 {
 public:
 	void virtual update(Agent* agent, float deltaTime) = 0;
+	virtual void draw(Agent* agent) {};
 };
 

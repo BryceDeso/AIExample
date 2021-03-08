@@ -35,6 +35,13 @@ public:
     void addForce(MathLibrary::Vector2 force);
     void addBehavior(Behavior* behavior);
 
+    ///<summary>
+    ///Returns the first behavior that matches the given type.
+    ///If no behavior matches the given type, returns null.
+    ///</summary>
+    template<typename BehaviorType>
+    BehaviorType* getBehavior();
+
 private:
 	MathLibrary::Vector2 m_force;
 	float m_maxForce;
@@ -42,3 +49,21 @@ private:
 	std::vector<Behavior*> m_behaviors;
 };
 
+template<typename BehaviorType>
+inline BehaviorType* Agent::getBehavior()
+{
+    //Iterates thorugh list of behaviors
+    for (int i = 0; i < m_behaviors.size(); i++)
+    {
+        //Attempts to cast behavior at the current index as the given type.
+        BehaviorType* behavior = dynamic_cast<BehaviorType*>(m_behaviors[i]);
+
+        //if the cast is successful return the behavior that was found
+        if (behavior != nullptr)
+        {
+            return behavior;
+        }
+    }
+    //if no behavior was found that match the type then return nullptr
+    return nullptr;
+}
