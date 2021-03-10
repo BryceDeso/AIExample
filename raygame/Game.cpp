@@ -45,8 +45,8 @@ void Game::start()
 	//EvadeBehavior* evade = new EvadeBehavior(player, 1);
 	//ArriveBehavior* arrive = new ArriveBehavior(player, 1);
 	//enemy->addBehavior(flee);
-	enemy->addBehavior(seek);
-	//enemy->addBehavior(wander);
+	//enemy->addBehavior(seek);
+	enemy->addBehavior(wander);
 	//enemy->addBehavior(pursuit);
 	//enemy->addBehavior(evade);
 	//enemy->addBehavior(arrive);

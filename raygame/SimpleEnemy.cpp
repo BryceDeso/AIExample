@@ -61,24 +61,32 @@ void SimpleEnemy::start()
 void SimpleEnemy::update(float deltatime)
 {
 	//Create a switch statment for the state machine
-	//The Switch should transition to the wander state if the target is not in sight
-	//You can set the wander force to be whatever value as you see fit but be sure to set seekforce to 0
+
 	switch (m_currentState)
 	{
-	case '0':
-		m_currentState = WanderBehavior()
+	case WANDER:
+		//The Switch should transition to the wander state if the target is not in sight
+		//You can set the wander force to be whatever value as you see fit but be sure to set seekforce to 0
+		while (checkTargetInSight() == false)
+		{
+			m_wander->setForceScale(3);
+			m_wander->setForceScale(0);
+		}
 		break;
-	case '1':
-
+	case SEEK:
+		while (checkTargetInSight() == true)
+		{
+			//the switch should transition to seek state if the target is in sight
+			//You can set the seek force to be whatever you want it to be but be sure to set wander force to 0
+			m_seek->setForceScale(2);
+			m_wander->setForceScale(0);
+		}
 		break;
 
 	default:
-		
+		m_wander->setForceScale(3);
 		break;
 	}
-
-	//the switch should transition to seek state if the target is in sight
-	//You can set the seek force to be whatever you want it to be but be sure to set wander force to 0
 
 	Enemy::update(deltatime);
 }

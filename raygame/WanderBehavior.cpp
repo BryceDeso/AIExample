@@ -17,12 +17,12 @@ WanderBehavior::WanderBehavior(Actor* target, float maxForce)
 
 MathLibrary::Vector2 WanderBehavior::calculateForce(Agent* agent)
 {
-	float circleCenter;
-	float circlePosX = 1;
-	float circlePosY = 1;
+	float circleDistance = 2;
+	MathLibrary::Vector2 circleCenter;
+	circleCenter = agent->getWorldPosition() * circleDistance;
 	
-	MathLibrary::Vector2 shutUpErrorList;
 
+	MathLibrary::Vector2 shutUpErrorList;
 	return shutUpErrorList;
 }
 
