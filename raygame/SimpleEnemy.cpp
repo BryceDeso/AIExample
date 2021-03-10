@@ -5,14 +5,25 @@
 bool SimpleEnemy::checkTargetInSight()
 {
 	//Check if target is null. If so return false.
+	if (getTarget() == nullptr)
+	{
+		return false;
+	}
 
-	//Find tge direction vector that represents where the target is realitive to the enemy.
+	//Find the direction vector that represents where the target is realitive to the enemy.
+	MathLibrary::Vector2 targetDirection = getTarget()->getWorldPosition() - getWorldPosition();
 
 	//Find the dot product of the enemy's forward and the direction vector
+	MathLibrary::Vector2 dotProduct;
+	dotProduct.dotProduct(getForward(), targetDirection);
 
 	//Find the angle using the dot product
-
-	//Chech if that angle is greater than the enemy's viewing angle(any value you see fit is true)
+	//Check if that angle is greater than the enemy's viewing angle(any value you see fit) is true.
+	MathLibrary::Vector2  angleFound;
+	if (angleFound.findAngle(dotProduct, getForward()) > 1)
+	{
+		return true;
+	}
 
 	//return if the enemy saw the target
 	return false;
@@ -21,10 +32,16 @@ bool SimpleEnemy::checkTargetInSight()
 void SimpleEnemy::onCollision(Actor* other)
 {
 	//Check to see if the enemy ran into the player
-
-	//if th enemy has run into the player, deal damge to player
-
-	//if the player's health is less than 0, set the target to nullptr
+	//if the enemy has run into the player, deal damge to player
+	if (checkCollision(other) == true)
+	{
+		dynamic_cast<Character*>(other)->takeDamage(10);
+		//if the player's health is less than 0, set the target to nullptr
+		if (dynamic_cast<Character*>(other)->getHealth() <= 0)
+		{
+			other = nullptr;
+		}
+	}
 }
 
 void SimpleEnemy::start()
@@ -33,16 +50,32 @@ void SimpleEnemy::start()
 	Enemy::start();
 
 	//Set the default state of the enemy
-
+	m_currentState = WANDER;
 
 	//initalize memeber variables
+	m_seek = getBehavior<SeekBehavior>();
+
+	setTarget(Enemy::getTarget());
 }
 
 void SimpleEnemy::update(float deltatime)
 {
 	//Create a switch statment for the state machine
 	//The Switch should transition to the wander state if the target is not in sight
-	//You can set the wander force to be whatever value you asee fit but be sure to set seekforce to 0
+	//You can set the wander force to be whatever value as you see fit but be sure to set seekforce to 0
+	switch (m_currentState)
+	{
+	case '0':
+		m_currentState = WanderBehavior()
+		break;
+	case '1':
+
+		break;
+
+	default:
+		
+		break;
+	}
 
 	//the switch should transition to seek state if the target is in sight
 	//You can set the seek force to be whatever you want it to be but be sure to set wander force to 0

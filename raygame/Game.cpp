@@ -29,8 +29,8 @@ Game::Game()
 void Game::start()
 {
 	InitWindow(m_screenWidth, m_screenHeight, "raylib [core] example - basic window");
-	m_camera->offset = { (float)m_screenWidth / 2, (float)(m_screenHeight / 2 };
-	m_camera->target = { (float)m_screenWidth / 2, (float)(m_screenHeight / 2 };
+	m_camera->offset = { (float)m_screenWidth / 2, (float)(m_screenHeight / 2) };
+	m_camera->target = { (float)m_screenWidth / 2, (float)(m_screenHeight / 2) };
 	m_camera->zoom = 1;
 
 	//Initalizes player and enemy
@@ -45,8 +45,8 @@ void Game::start()
 	//EvadeBehavior* evade = new EvadeBehavior(player, 1);
 	//ArriveBehavior* arrive = new ArriveBehavior(player, 1);
 	//enemy->addBehavior(flee);
-	//enemy->addBehavior(seek);
-	enemy->addBehavior(wander);
+	enemy->addBehavior(seek);
+	//enemy->addBehavior(wander);
 	//enemy->addBehavior(pursuit);
 	//enemy->addBehavior(evade);
 	//enemy->addBehavior(arrive);

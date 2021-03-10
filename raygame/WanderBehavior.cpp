@@ -21,7 +21,9 @@ MathLibrary::Vector2 WanderBehavior::calculateForce(Agent* agent)
 	float circlePosX = 1;
 	float circlePosY = 1;
 	
+	MathLibrary::Vector2 shutUpErrorList;
 
+	return shutUpErrorList;
 }
 
 void WanderBehavior::update(Agent* agent, float deltaTime)

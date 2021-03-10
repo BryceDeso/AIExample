@@ -11,7 +11,7 @@ public:
 	void update(float deltaTime) override;
 
 	virtual void setTarget(Actor* target) { m_target = target; }
-	virtual Actor* getTarget(Actor* target) { return target; }
+	virtual Actor* getTarget() { return m_target; }
 
 private:
 	Actor* m_target;
