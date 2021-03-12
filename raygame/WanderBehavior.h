@@ -6,7 +6,7 @@ class WanderBehavior :	public SteeringBehavior
 {
 public:
 	WanderBehavior();
-	WanderBehavior(Actor* target, float maxForce);
+	WanderBehavior(float maxForce);
 
 	void setTarget(Actor* actor) { m_target = actor; }
 	Actor* getTarget() { return m_target; }
