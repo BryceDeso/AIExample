@@ -42,7 +42,10 @@ void Agent::update(float deltaTime)
 	//Calls update for every behavior in the list.
 	for (int i = 0; i < m_behaviors.size(); i++)
 	{
-		m_behaviors[i]->update(this, deltaTime);
+		if (m_behaviors[i]->getEnabled())
+		{
+			m_behaviors[i]->update(this, deltaTime);
+		}	
 	}
 
 	//Updates velocity with the new force.

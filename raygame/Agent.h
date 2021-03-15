@@ -2,7 +2,6 @@
 #include "Actor.h"
 #include <vector>
 
-
 class Behavior;
 
 class Agent : public Actor
@@ -59,7 +58,7 @@ inline BehaviorType* Agent::getBehavior()
         BehaviorType* behavior = dynamic_cast<BehaviorType*>(m_behaviors[i]);
 
         //if the cast is successful return the behavior that was found
-        if (behavior != nullptr)
+        if (behavior)
         {
             return behavior;
         }
