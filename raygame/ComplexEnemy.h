@@ -1,11 +1,9 @@
 #pragma once
 #include "Enemy.h"
 #include "Player.h"
-
-class WanderBeahvior;
-class PursuitBehavior;
-class EvadeBehavior;
-
+#include "WanderBehavior.h"
+#include "PursuitBehavior.h"
+#include "EvadeBehavior.h"
 
 class ComplexEnemy : public Enemy
 {
@@ -15,7 +13,7 @@ public:
 	void setTarget(Actor* target) override;
 	void onCollision(Actor* other) override;
 	//void update(float deltaTime) override;
-	WanderBeahvior* getWander() { return m_wanderBehavior; }
+	WanderBehavior* getWander() { return m_wanderBehavior; }
 	PursuitBehavior* getPursuit() { return m_pursuitBehavior; }
 	EvadeBehavior* getEvade() { return m_evadeBeavior; }
 
@@ -23,7 +21,7 @@ public:
 	bool checkTargetinRange(float range);
 
 private:
-	WanderBeahvior* m_wanderBehavior;
+	WanderBehavior* m_wanderBehavior;
 	PursuitBehavior* m_pursuitBehavior;
 	EvadeBehavior* m_evadeBeavior;
 };

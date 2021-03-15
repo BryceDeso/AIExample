@@ -8,7 +8,7 @@ void ComplexEnemy::start()
 	Enemy::start();
 
 	//intalize behaviors
-	m_wanderBehavior = getBehavior<WanderBeahvior>();
+	m_wanderBehavior = getBehavior<WanderBehavior>();
 	m_pursuitBehavior = getBehavior<PursuitBehavior>();
 	m_evadeBeavior = getBehavior<EvadeBehavior>();
 

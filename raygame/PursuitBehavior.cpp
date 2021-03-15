@@ -16,7 +16,7 @@ PursuitBehavior::PursuitBehavior(Actor* target, float seekForce)
 
 MathLibrary::Vector2 PursuitBehavior::calculateForce(Agent* agent)
 {
-	//Find the direction ot move in.
+	//Find the direction to move in.
 	MathLibrary::Vector2 direction = MathLibrary::Vector2::normalize(m_target->getWorldPosition() - agent->getWorldPosition());
 
 	//Scale the direction vector by seekForce

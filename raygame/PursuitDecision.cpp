@@ -1,5 +1,6 @@
 #include "PursuitDecision.h"
 #include "ComplexEnemy.h"
+#include "WanderBehavior.h"
 
 void PursuitDecision::makeDecision(Agent* agent, float deltaTime)
 {
@@ -7,8 +8,8 @@ void PursuitDecision::makeDecision(Agent* agent, float deltaTime)
 
 	if (enemy)
 	{
-		enemy->getPursuit();
-		enemy->getWander();
-		enemy->getEvade();
+		enemy->getPursuit()->setEnabled(true);
+		enemy->getWander()->setEnabled(false);
+		enemy->getEvade()->setEnabled(false);
 	}
 }

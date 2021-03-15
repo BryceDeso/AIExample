@@ -39,7 +39,7 @@ void SimpleEnemy::onCollision(Actor* other)
 		//if the player's health is less than 0, set the target to nullptr
 		if (dynamic_cast<Character*>(other)->getHealth() <= 0)
 		{
-			other = nullptr;
+			this->setTarget(nullptr);
 		}
 	}
 }
@@ -55,6 +55,8 @@ void SimpleEnemy::start()
 	//initalize memeber variables
 	m_seek = getBehavior<SeekBehavior>();
 
+	m_wander = getBehavior<WanderBehavior>();
+
 	setTarget(Enemy::getTarget());
 }
 
@@ -67,14 +69,14 @@ void SimpleEnemy::update(float deltatime)
 	case WANDER:
 		//The Switch should transition to the wander state if the target is not in sight
 		//You can set the wander force to be whatever value as you see fit but be sure to set seekforce to 0
-		while (checkTargetInSight() == false)
+		if (checkTargetInSight() == false)
 		{
 			m_wander->setForceScale(3);
 			m_wander->setForceScale(0);
 		}
 		break;
 	case SEEK:
-		while (checkTargetInSight() == true)
+		if (checkTargetInSight() == true)
 		{
 			//the switch should transition to seek state if the target is in sight
 			//You can set the seek force to be whatever you want it to be but be sure to set wander force to 0
