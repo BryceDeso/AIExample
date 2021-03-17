@@ -12,6 +12,7 @@
 #include "PursuitDecision.h"
 #include "ComplexEnemy.h"
 #include "SimpleEnemy.h"
+#include "Graph.h"
 
 bool Game::m_gameOver = false;
 Scene** Game::m_scenes = new Scene*;
@@ -37,11 +38,13 @@ void Game::start()
 	m_camera->target = { (float)m_screenWidth / 2, (float)(m_screenHeight / 2) };
 	m_camera->zoom = 1;
 
-	//Initalizes player and enemy
+	//Initalize player and enemies
 	Player* player = new Player(10, 10, 5, "Images/player.png", 1, 10);
 	Agent* enemy = new Agent(32, 10, 1, "Images/enemy.png", 1, 10);
 	SimpleEnemy* simpleEnemy = new SimpleEnemy(32, 10, 1, "Images/enemy.png", player);
 	//ComplexEnemy* complexEnemy = new ComplexEnemy(32, 15, 1, "Images/enemy.png", player, 1, 10);
+
+	//STEERING BEHAVIORS BEGIN
 
 	//Creates new steeriong behavior then add it to enemy
 	SeekBehavior* seek = new SeekBehavior(player, 10);
@@ -57,27 +60,38 @@ void Game::start()
 	//ArriveBehavior* arrive = new ArriveBehavior(player, 1);
 	//enemy->addBehavior(flee);
 	//enemy->addBehavior(seek);
-	//enemy->addBehavior(wander);
+	enemy->addBehavior(wander);
 	//enemy->addBehavior(pursuit);
 	//enemy->addBehavior(evade);
 	//enemy->addBehavior(arrive);
 
 	//Adds player and enemy to scene while creating a new scene
-	Scene* scene = new Scene();
-	scene->addActor(player);
+	//Scene* sceneBehavior = new Scene();
+	//sceneBehavior->addActor(player);
 	//scene->addActor(enemy);
-	scene->addActor(simpleEnemy);
+	//scene->addActor(simpleEnemy);
 	//scene->addActor(complexEnemy);
-	addScene(scene);
+	//addScene(sceneBehavior);
+
+	//STEERING BEHAVIORS END
+
+	//PATHFINDING BEGIN
+
+	Graph* graph = new Graph(5, 5, 5, 1);
+
+	Scene* pathFinding = new Scene();
+	pathFinding->addActor(graph);
+
+	addScene(pathFinding);
+
+	//PATHFINDING END
+
 	SetTargetFPS(60);
 }
 
 void Game::update(float deltaTime)
 {
-	for (int i = 0; i < m_sceneCount; i++)
-	{
-		m_scenes[i]->update(deltaTime);
-	}
+	getCurrentScene()->update(deltaTime);
 }
 
 void Game::draw()
@@ -87,10 +101,7 @@ void Game::draw()
 	BeginMode2D(*m_camera);
 	ClearBackground(BLACK);
 
-	for (int i = 0; i < m_sceneCount; i++)
-	{
-		m_scenes[i]->draw();
-	}
+	getCurrentScene()->draw();
 
 	EndMode2D();
 	EndDrawing();

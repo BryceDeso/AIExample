@@ -72,7 +72,6 @@ void SimpleEnemy::update(float deltatime)
 		if (checkTargetInSight() == false)
 		{
 			m_wander->setForceScale(3);
-			m_wander->setForceScale(0);
 		}
 		break;
 	case SEEK:
@@ -81,7 +80,6 @@ void SimpleEnemy::update(float deltatime)
 			//the switch should transition to seek state if the target is in sight
 			//You can set the seek force to be whatever you want it to be but be sure to set wander force to 0
 			m_seek->setForceScale(2);
-			m_wander->setForceScale(0);
 		}
 		break;
 
