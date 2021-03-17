@@ -68,7 +68,7 @@ void Game::start()
 	//Adds player and enemy to scene while creating a new scene
 	//Scene* sceneBehavior = new Scene();
 	//sceneBehavior->addActor(player);
-	//scene->addActor(enemy);
+	//sceneBehavior->addActor(enemy);
 	//scene->addActor(simpleEnemy);
 	//scene->addActor(complexEnemy);
 	//addScene(sceneBehavior);
@@ -77,11 +77,13 @@ void Game::start()
 
 	//PATHFINDING BEGIN
 
-	Graph* graph = new Graph(5, 5, 5, 1);
+	Graph* graph = new Graph(30, 20, 10, 1);
+	graph->setWorldPostion(MathLibrary::Vector2(10, 2));
+
+	graph->BFS(0, 0, 13, 10);
 
 	Scene* pathFinding = new Scene();
 	pathFinding->addActor(graph);
-
 	addScene(pathFinding);
 
 	//PATHFINDING END
