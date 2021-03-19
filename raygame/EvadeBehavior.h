@@ -6,7 +6,7 @@ class EvadeBehavior : public SteeringBehavior
 {
 public:
 	EvadeBehavior();
-	EvadeBehavior(Actor* target, float seekForce = 1);
+	EvadeBehavior(Actor* target, float evadeForce = 1);
 
 	void setTarget(Actor* target) { m_target = target; }
 	Actor* getTarget() { return m_target; }
@@ -16,5 +16,5 @@ public:
 private:
 	//The agent the behavior is evading.
 	Actor* m_target;
-	float m_seekForce;
+	float m_evadeForce;
 };

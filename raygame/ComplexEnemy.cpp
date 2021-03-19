@@ -8,9 +8,18 @@ void ComplexEnemy::start()
 	Enemy::start();
 
 	//intalize behaviors
+	EvadeBehavior* evade = new EvadeBehavior(getTarget(), 10);
+	WanderBehavior* wander = new WanderBehavior(1);
+	PursuitBehavior* pursue = new PursuitBehavior(getTarget(), 10);
+
+	addBehavior(evade);
+	addBehavior(wander);
+	addBehavior(pursue);
+
 	m_wanderBehavior = getBehavior<WanderBehavior>();
 	m_pursuitBehavior = getBehavior<PursuitBehavior>();
-	m_evadeBeavior = getBehavior<EvadeBehavior>();
+	m_evadeBehavior = getBehavior<EvadeBehavior>();
+
 
 	//Set targte to the given from the base class.
 	setTarget(Enemy::getTarget());
@@ -20,7 +29,7 @@ void ComplexEnemy::setTarget(Actor* target)
 {
 	Enemy::setTarget(target);
 	m_pursuitBehavior->setTarget(target);
-	m_pursuitBehavior->setTarget(target);
+	m_evadeBehavior->setTarget(target);
 }
 
 void ComplexEnemy::onCollision(Actor* other)

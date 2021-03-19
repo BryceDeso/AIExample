@@ -39,10 +39,10 @@ void Game::start()
 	m_camera->zoom = 1;
 
 	//Initalize player and enemies
-	Player* player = new Player(10, 10, 5, "Images/player.png", 1, 10);
-	Agent* enemy = new Agent(32, 10, 1, "Images/enemy.png", 1, 10);
+	Player* player = new Player(10, 10, 5, "Images/player.png", 10, 10);
+	Agent* enemy = new Agent(5, 5, 1, "Images/enemy.png", 1, 1);
 	SimpleEnemy* simpleEnemy = new SimpleEnemy(32, 10, 1, "Images/enemy.png", player);
-	//ComplexEnemy* complexEnemy = new ComplexEnemy(32, 15, 1, "Images/enemy.png", player, 1, 10);
+	ComplexEnemy* complexEnemy = new ComplexEnemy(32, 15, 1, "Images/enemy.png", player, 1, 10);
 
 	//STEERING BEHAVIORS BEGIN
 
@@ -50,28 +50,30 @@ void Game::start()
 	SeekBehavior* seek = new SeekBehavior(player, 10);
 	FleeBehavior* flee = new FleeBehavior(player, 1);
 	WanderBehavior* wander = new WanderBehavior(0.1);
-	PursuitBehavior* pursuit = new PursuitBehavior(player, 2);
+	PursuitBehavior* pursuit = new PursuitBehavior(player, 10);
+	EvadeBehavior* evade = new EvadeBehavior(player, 0.1f);
 	PursuitDecision* pursuitDecision = new PursuitDecision();
 	DecisionBehavior* decisionBehavior = new DecisionBehavior(pursuitDecision);
-	//complexEnemy->addBehavior(decisionBehavior);
+
+	complexEnemy->addBehavior(decisionBehavior);
+
 	simpleEnemy->addBehavior(seek);
 	simpleEnemy->addBehavior(wander);
-	//EvadeBehavior* evade = new EvadeBehavior(player, 1);
-	//ArriveBehavior* arrive = new ArriveBehavior(player, 1);
+
 	//enemy->addBehavior(flee);
 	//enemy->addBehavior(seek);
-	enemy->addBehavior(wander);
+	//enemy->addBehavior(wander);
 	//enemy->addBehavior(pursuit);
-	//enemy->addBehavior(evade);
+	enemy->addBehavior(evade);
 	//enemy->addBehavior(arrive);
 
 	//Adds player and enemy to scene while creating a new scene
-	//Scene* sceneBehavior = new Scene();
-	//sceneBehavior->addActor(player);
+	Scene* sceneBehavior = new Scene();
+	sceneBehavior->addActor(player);
 	//sceneBehavior->addActor(enemy);
-	//scene->addActor(simpleEnemy);
-	//scene->addActor(complexEnemy);
-	//addScene(sceneBehavior);
+	//sceneBehavior->addActor(simpleEnemy);
+	sceneBehavior->addActor(complexEnemy);
+	addScene(sceneBehavior);
 
 	//STEERING BEHAVIORS END
 

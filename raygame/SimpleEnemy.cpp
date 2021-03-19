@@ -72,6 +72,8 @@ void SimpleEnemy::update(float deltatime)
 		if (checkTargetInSight() == false)
 		{
 			m_wander->setForceScale(3);
+			m_seek->setForceScale(0);
+			m_seek->setTarget(m_seek->getTarget());
 		}
 		break;
 	case SEEK:

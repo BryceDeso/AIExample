@@ -15,14 +15,14 @@ public:
 	//void update(float deltaTime) override;
 	WanderBehavior* getWander() { return m_wanderBehavior; }
 	PursuitBehavior* getPursuit() { return m_pursuitBehavior; }
-	EvadeBehavior* getEvade() { return m_evadeBeavior; }
+	EvadeBehavior* getEvade() { return m_evadeBehavior; }
 
 	bool checkTargetInSight(float angle = 2);
-	bool checkTargetinRange(float range);
+	bool checkTargetinRange(float range = 2);
 
 private:
 	WanderBehavior* m_wanderBehavior;
 	PursuitBehavior* m_pursuitBehavior;
-	EvadeBehavior* m_evadeBeavior;
+	EvadeBehavior* m_evadeBehavior;
 };
 

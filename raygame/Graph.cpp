@@ -99,29 +99,86 @@ void Graph::BFS(int startX, int startY, int goalX, int goalY)
 
 void Graph::Dijkstra(int startX, int startY, int goalX, int goalY)
 {
+	//Create a node pointer that points to the start node
+	//Create a node pointer that points to the goal node
 	Node* start = getNode(startX, startY);
 	Node* goal = getNode(goalX, goalY);
 
+	//Check if the start or the goal pointer is null
 	if (!start || !goal)
 	{
+		//return an empty list
 		return;
 	}
+	//end if statement
 
+	//Set the start nodes color to be green
 	start->color = ColorToInt(GREEN);
 
+	//Create a node pointer that will be act as an iterator for the graph
+	//Create an open list
+	//Create a closed list
 	Node* currentNode = start;
 	std::deque<Node*> openList;
 	Node* closedList;
 
+	//Add start to the open list
 	openList.push_front(start);
-	
+
+	//Loop while the open list is not empty
 	while (!openList.empty())
 	{
+		//Sort the items in the open list by the g score
+
+
+		//Set the iterator to be the first item in the open list
+
+		//Check if the iterator is pointing to the goal node
 		for (int i = 0; i < openList.size(); i++)
 		{
 			openList[i]->edges[i]->getCost();
 		}
 	}
+
+			//Mark the goal as being found by changing its color
+			//Return the new path found
+
+		//end if statement
+
+		//Pop the first item off the open list
+		//Add the first item to the closed list
+
+		//Loop through all of the edges for the iterator
+
+			//Create a node pointer to store the other end of the edge
+
+			//Check if the iterator is on the second end of the node
+				//Set the edge end pointer to be the first end of the node
+			//Otherwise if the iterator is on the first end of the node...
+				//set the edge end pointer to be the second end of the node
+			// end if statement
+
+			//Check if node at the end of the edge is in the closed list
+
+				//Create an int and set it to be the g score of the iterator plus the cost of the edge
+
+
+				//Check if the node at the end ofthe edge is in the open list
+
+					//Mark the node as visited by changing its color
+					//Set the nodes g score to be the g score calculated earlier
+					//Set the nodes previous to be the iterator
+					//Add the node to the open list
+
+				//Otherwise if the g score is less than the node at the end of the edge's g score...
+
+					//Mark the node as visited by changing its color
+					//Set its g score to be the g score calculated earlier
+					//Set its previous to be the current node
+
+				//end if statement
+		//end loop
+	//end loop
 }
 
 

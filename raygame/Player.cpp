@@ -5,7 +5,8 @@
 #include <iostream>
 #include "Bullet.h"
 
-Player::Player(float x, float y, float collisionRadius, const char* spriteFilePath, float maxSpeed, float maxForce) : Character(x, y, collisionRadius, spriteFilePath, maxSpeed, maxForce)
+Player::Player(float x, float y, float collisionRadius, const char* spriteFilePath,  float maxSpeed, float maxForce) : 
+    Character(x, y, collisionRadius, spriteFilePath, maxSpeed, maxForce)
 {
 }
 
@@ -34,6 +35,5 @@ void Player::update(float deltatime)
 
 void Player::debug()
 {
-
     std::cout << "X: " << getVelocity().x << std::endl << "Y: "<< getVelocity().y << std::endl;
 }
