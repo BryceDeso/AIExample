@@ -116,10 +116,10 @@ void Graph::Dijkstra(int startX, int startY, int goalX, int goalY)
 	start->color = ColorToInt(BLUE);
 
 	//Create a node pointer that will be act as an iterator for the graph
-	//Create an open list
-	//Create a closed list
 	Node* currentNode = start;
+	//Create an open list
 	std::deque<Node*> openList;
+	//Create a closed list
 	std::deque<Node*> closedList;
 
 	//Add start to the open list
@@ -128,7 +128,7 @@ void Graph::Dijkstra(int startX, int startY, int goalX, int goalY)
 	//Loop while the open list is not empty
 	while (!openList.empty())
 	{
-		//Sort the items in the open list by the g score
+		//Sort the items in the open list by the f score
 
 
 		//Set the iterator to be the first item in the open list
@@ -185,15 +185,18 @@ void Graph::Dijkstra(int startX, int startY, int goalX, int goalY)
 					currentEdgeEnd->edges[i]->setCost(gScore);
 
 					//Set the nodes previous to be the iterator
-					currentEdgeEnd.
+					currentEdgeEnd->setPrevious(currentNode);
 
 					//Add the node to the open list
+					openList.push_front(currentEdgeEnd);
 				}
 				//Otherwise if the g score is less than the node at the end of the edge's g score...
-				else if()
+				else if(gScore < currentEdgeEnd->edges[i]->getCost())
 				{
 					//Mark the node as visited by changing its color
+					currentEdgeEnd->color = ColorToInt(RED);
 					//Set its g score to be the g score calculated earlier
+					gScore;
 					//Set its previous to be the current node
 				}
 				//end if statement

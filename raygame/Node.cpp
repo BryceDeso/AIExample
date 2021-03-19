@@ -7,6 +7,7 @@ Node::Node(int x, int y, int nodeSize)
 	graphPosition.x = x;
 	graphPosition.y = y;
 	size = nodeSize;
+	m_previous = nullptr;
 }
 
 void Node::draw()

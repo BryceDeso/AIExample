@@ -13,6 +13,6 @@ public:
 	void draw() override;
 	void update(float deltaTime) override;
 	float getCost() { return m_cost; }
-	void setCost(float cost) { m_cost = cost };
+	void setCost(float cost) { m_cost = cost; }
 };
 

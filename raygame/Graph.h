@@ -15,6 +15,7 @@ public:
 	void Dijkstra(int startX, int startY, int goalX, int goalY);
 	Node* getNode(int xPos, int yPos);
 	void addNodeToList(Node* node);
+	
 private:
 	void createGraph(int nodeSize, int nodeSpacing);
 

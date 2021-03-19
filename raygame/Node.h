@@ -15,5 +15,8 @@ public:
 	bool visited;
 	void draw() override;
 	void update(float deltaTime) override;
+	Node* m_previous;
+	Node* getPrevious() { return m_previous; }
+	void setPrevious(Node* previous) { m_previous = previous; }
 };
 
