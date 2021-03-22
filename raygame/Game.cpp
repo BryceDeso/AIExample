@@ -18,8 +18,8 @@ bool Game::m_gameOver = false;
 Scene** Game::m_scenes = new Scene*;
 int Game::m_sceneCount = 0;
 int Game::m_currentSceneIndex = 0;
-int Game::m_screenWidth = 1924;
-int Game::m_screenHeight = 960;
+int Game::m_screenWidth = 1024;
+int Game::m_screenHeight = 720;
 
 
 Game::Game()
@@ -41,15 +41,15 @@ void Game::start()
 	//Initalize player and enemies
 	Player* player = new Player(10, 10, 5, "Images/player.png", 10, 10);
 	Agent* enemy = new Agent(5, 5, 1, "Images/enemy.png", 1, 1);
-	SimpleEnemy* simpleEnemy = new SimpleEnemy(32, 10, 1, "Images/enemy.png", player);
-	ComplexEnemy* complexEnemy = new ComplexEnemy(32, 15, 1, "Images/enemy.png", player, 1, 10);
+	SimpleEnemy* simpleEnemy = new SimpleEnemy(5, 5, 1, "Images/enemy.png", player);
+	ComplexEnemy* complexEnemy = new ComplexEnemy(10, 10, 1, "Images/enemy.png", player, 10, 10);
 
 	//STEERING BEHAVIORS BEGIN
 
 	//Creates new steeriong behavior then add it to enemy
 	SeekBehavior* seek = new SeekBehavior(player, 10);
 	FleeBehavior* flee = new FleeBehavior(player, 1);
-	WanderBehavior* wander = new WanderBehavior(0.1);
+	WanderBehavior* wander = new WanderBehavior(10);
 	PursuitBehavior* pursuit = new PursuitBehavior(player, 10);
 	EvadeBehavior* evade = new EvadeBehavior(player, 0.1f);
 	PursuitDecision* pursuitDecision = new PursuitDecision();
@@ -69,11 +69,12 @@ void Game::start()
 
 	//Adds player and enemy to scene while creating a new scene
 	Scene* sceneBehavior = new Scene();
-	sceneBehavior->addActor(player);
+	//sceneBehavior->addActor(player);
 	//sceneBehavior->addActor(enemy);
-	//sceneBehavior->addActor(simpleEnemy);
-	sceneBehavior->addActor(complexEnemy);
-	addScene(sceneBehavior);
+	sceneBehavior->addActor(simpleEnemy);
+	//sceneBehavior->addActor(complexEnemy);
+
+	m_currentSceneIndex = addScene(sceneBehavior);
 
 	//STEERING BEHAVIORS END
 
@@ -82,11 +83,13 @@ void Game::start()
 	Graph* graph = new Graph(30, 20, 10, 1);
 	graph->setWorldPostion(MathLibrary::Vector2(10, 2));
 
-	graph->BFS(0, 0, 13, 10);
+	//graph->BFS(0, 0, 13, 10);
+	//graph->Dijkstra(0, 0, 13, 10);
+
 
 	Scene* pathFinding = new Scene();
 	pathFinding->addActor(graph);
-	addScene(pathFinding);
+	//addScene(pathFinding);
 
 	//PATHFINDING END
 

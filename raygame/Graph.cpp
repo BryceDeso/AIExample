@@ -129,13 +129,25 @@ void Graph::Dijkstra(int startX, int startY, int goalX, int goalY)
 	//Loop while the open list is not empty
 	while (!openList.empty())
 	{
-		//Sort the items in the open list by the f score
+		//Sort the items in the open list by the g score
+		for (int i = 0; i < openList.size(); i++)
+		{
+			for (int j = openList.size() - 1; j > i; j--)
+			{
+				if (openList[j] < openList[j - 1])
+				{
+					Node* temp = openList[j];
+					openList[j] = openList[j - 1];
+					openList[j - 1] = temp;
+				}
+			}
+		}
 
 		//Set the iterator to be the first item in the open list
 		currentNode = openList.front();
 
 		//Check if the iterator is pointing to the goal node
-		if (currentNode = goal)
+		if (currentNode == goal)
 		{
 			//Mark the goal as being found by changing its color
 			goal->color = ColorToInt(GREEN);
@@ -170,13 +182,13 @@ void Graph::Dijkstra(int startX, int startY, int goalX, int goalY)
 			// end if statement
 			
 			//Check if node at the end of the edge is in the closed list
-			if (currentEdgeEnd == closedList.front())
+			if (currentEdgeEnd == currentNode)
 			{
 				//Create an float and set it to be the g score of the iterator plus the cost of the edge
 				float gScore = currentNode->edges[i]->getCost() + currentEdgeEnd->edges[i]->getCost();
 
 				//Check if the node at the end of the edge is in the open list
-				if (currentEdgeEnd == openList.front())
+				if (currentEdgeEnd)
 				{
 					//Mark the node as visited by changing its color
 					currentEdgeEnd->color = ColorToInt(RED);
@@ -223,7 +235,6 @@ Node* Graph::getNode(int xPos, int yPos)
 			return m_nodes[i];
 		}
 	}
-
 	return nullptr;
 }
 
@@ -232,21 +243,21 @@ void Graph::addNodeToList(Node* node)
 
 }
 
-void Graph::sort(Node* list)
-{
-	for (int i = 0; i < m_nodes.size(); i++)
-	{
-		for (int j = m_nodes.size() - 1; j > i; j--)
-		{
-			if (list[j].edges[j]->getCost() < list[j - 1].edges[j]->getCost())
-			{
-				Node temp = list[j];
-				list[j] = list[j - 1];
-				list[j - 1] = temp;
-			}
-		}
-	}
-}
+//void Graph::sort(Node* list)
+//{
+//	for (int i = 0; i < m_nodes.size(); i++)
+//	{
+//		for (int j = m_nodes.size() - 1; j > i; j--)
+//		{
+//			if ()
+//			{
+//				Node temp = list[j];
+//				list[j] = list[j - 1];
+//				list[j - 1] = temp;
+//			}
+//		}
+//	}
+//}
 
 void Graph::createGraph(int nodeSize, int nodeSpacing)
 {
