@@ -32,6 +32,7 @@ void Graph::update(float deltaTime)
 
 void Graph::BFS(int startX, int startY, int goalX, int goalY)
 {
+
 	//Get refernece to start and end nodes
 	Node* start = getNode(startX, startY);
 	Node* goal = getNode(goalX, goalY);
@@ -98,7 +99,7 @@ void Graph::BFS(int startX, int startY, int goalX, int goalY)
 }
 
 void Graph::Dijkstra(int startX, int startY, int goalX, int goalY)
-{
+{	
 	//Create a node pointer that points to the start node
 	//Create a node pointer that points to the goal node
 	Node* start = getNode(startX, startY);
@@ -129,7 +130,6 @@ void Graph::Dijkstra(int startX, int startY, int goalX, int goalY)
 	while (!openList.empty())
 	{
 		//Sort the items in the open list by the f score
-
 
 		//Set the iterator to be the first item in the open list
 		currentNode = openList.front();
@@ -196,8 +196,9 @@ void Graph::Dijkstra(int startX, int startY, int goalX, int goalY)
 					//Mark the node as visited by changing its color
 					currentEdgeEnd->color = ColorToInt(RED);
 					//Set its g score to be the g score calculated earlier
-					gScore;
+					currentEdgeEnd->edges[i]->setCost(gScore);
 					//Set its previous to be the current node
+					currentEdgeEnd->setPrevious(currentNode);
 				}
 				//end if statement
 			}
@@ -207,7 +208,6 @@ void Graph::Dijkstra(int startX, int startY, int goalX, int goalY)
 
 	//end loop
 }
-
 
 Node* Graph::getNode(int xPos, int yPos)
 {
@@ -230,6 +230,22 @@ Node* Graph::getNode(int xPos, int yPos)
 void Graph::addNodeToList(Node* node)
 {
 
+}
+
+void Graph::sort(Node* list)
+{
+	for (int i = 0; i < m_nodes.size(); i++)
+	{
+		for (int j = m_nodes.size() - 1; j > i; j--)
+		{
+			if (list[j].edges[j]->getCost() < list[j - 1].edges[j]->getCost())
+			{
+				Node temp = list[j];
+				list[j] = list[j - 1];
+				list[j - 1] = temp;
+			}
+		}
+	}
 }
 
 void Graph::createGraph(int nodeSize, int nodeSpacing)
