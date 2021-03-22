@@ -39,10 +39,10 @@ void Game::start()
 	m_camera->zoom = 1;
 
 	//Initalize player and enemies
-	Player* player = new Player(10, 10, 5, "Images/player.png", 10, 10);
+	Player* player = new Player(10, 10, 1, "Images/player.png", 10, 10);
 	Agent* enemy = new Agent(5, 5, 1, "Images/enemy.png", 1, 1);
 	SimpleEnemy* simpleEnemy = new SimpleEnemy(5, 5, 1, "Images/enemy.png", player);
-	ComplexEnemy* complexEnemy = new ComplexEnemy(10, 10, 1, "Images/enemy.png", player, 10, 10);
+	ComplexEnemy* complexEnemy = new ComplexEnemy(5, 5, 1, "Images/enemy.png", player, 10, 10);
 
 	//STEERING BEHAVIORS BEGIN
 
@@ -62,17 +62,17 @@ void Game::start()
 
 	//enemy->addBehavior(flee);
 	//enemy->addBehavior(seek);
-	//enemy->addBehavior(wander);
+	enemy->addBehavior(wander);
 	//enemy->addBehavior(pursuit);
-	enemy->addBehavior(evade);
+	//enemy->addBehavior(evade);
 	//enemy->addBehavior(arrive);
 
 	//Adds player and enemy to scene while creating a new scene
 	Scene* sceneBehavior = new Scene();
-	//sceneBehavior->addActor(player);
+	sceneBehavior->addActor(player);
 	//sceneBehavior->addActor(enemy);
-	sceneBehavior->addActor(simpleEnemy);
-	//sceneBehavior->addActor(complexEnemy);
+	//sceneBehavior->addActor(simpleEnemy);
+	sceneBehavior->addActor(complexEnemy);
 
 	m_currentSceneIndex = addScene(sceneBehavior);
 
