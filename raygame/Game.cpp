@@ -62,7 +62,7 @@ void Game::start()
 
 	//enemy->addBehavior(flee);
 	//enemy->addBehavior(seek);
-	enemy->addBehavior(wander);
+	//enemy->addBehavior(wander);
 	//enemy->addBehavior(pursuit);
 	//enemy->addBehavior(evade);
 	//enemy->addBehavior(arrive);
@@ -74,22 +74,22 @@ void Game::start()
 	//sceneBehavior->addActor(simpleEnemy);
 	sceneBehavior->addActor(complexEnemy);
 
-	m_currentSceneIndex = addScene(sceneBehavior);
+	//addScene(sceneBehavior);
 
 	//STEERING BEHAVIORS END
 
 	//PATHFINDING BEGIN
 
-	Graph* graph = new Graph(30, 20, 10, 1);
-	graph->setWorldPostion(MathLibrary::Vector2(10, 2));
+	Graph* graph = new Graph(20, 20, 10, 1);
+	graph->setWorldPostion(MathLibrary::Vector2(2, 2));
 
 	//graph->BFS(0, 0, 13, 10);
-	//graph->Dijkstra(0, 0, 13, 10);
+	graph->Dijkstra(0, 0, 5, 14);
 
 
 	Scene* pathFinding = new Scene();
 	pathFinding->addActor(graph);
-	//addScene(pathFinding);
+	addScene(pathFinding);
 
 	//PATHFINDING END
 

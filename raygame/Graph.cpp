@@ -2,7 +2,6 @@
 #include "Node.h"
 #include "Edge.h"
 #include <raylib.h>
-#include <deque>
 
 Graph::Graph(int width, int height, int nodeSize, int nodeSpacing)
 {
@@ -116,7 +115,7 @@ void Graph::Dijkstra(int startX, int startY, int goalX, int goalY)
 	//Set the start nodes color to be green
 	start->color = ColorToInt(BLUE);
 
-	//Create a node pointer that will be act as an iterator for the graph
+	//Create a node pointer that will act as an iterator for the graph
 	Node* currentNode = start;
 	//Create an open list
 	std::deque<Node*> openList;
@@ -130,18 +129,7 @@ void Graph::Dijkstra(int startX, int startY, int goalX, int goalY)
 	while (!openList.empty())
 	{
 		//Sort the items in the open list by the g score
-		for (int i = 0; i < openList.size(); i++)
-		{
-			for (int j = openList.size() - 1; j > i; j--)
-			{
-				if (openList[j] < openList[j - 1])
-				{
-					Node* temp = openList[j];
-					openList[j] = openList[j - 1];
-					openList[j - 1] = temp;
-				}
-			}
-		}
+		sort(openList);
 
 		//Set the iterator to be the first item in the open list
 		currentNode = openList.front();
@@ -182,19 +170,20 @@ void Graph::Dijkstra(int startX, int startY, int goalX, int goalY)
 			// end if statement
 			
 			//Check if node at the end of the edge is in the closed list
-			if (currentEdgeEnd == currentNode)
+			if (!checkDeque(closedList, currentEdgeEnd))
 			{
-				//Create an float and set it to be the g score of the iterator plus the cost of the edge
-				float gScore = currentNode->edges[i]->getCost() + currentEdgeEnd->edges[i]->getCost();
+				//Create an int and set it to be the g score of the iterator plus the cost of the edge
+				int gScore = currentNode->getGScore() + currentNode->edges[i]->getCost();
 
 				//Check if the node at the end of the edge is in the open list
-				if (currentEdgeEnd)
+				if (!checkDeque(openList, currentEdgeEnd))
 				{
 					//Mark the node as visited by changing its color
 					currentEdgeEnd->color = ColorToInt(RED);
+					currentEdgeEnd->visited = true;
 
 					//Set the nodes g score to be the g score calculated earlier
-					currentEdgeEnd->edges[i]->setCost(gScore);
+					currentEdgeEnd->setGScore(gScore);
 
 					//Set the nodes previous to be the iterator
 					currentEdgeEnd->setPrevious(currentNode);
@@ -203,10 +192,11 @@ void Graph::Dijkstra(int startX, int startY, int goalX, int goalY)
 					openList.push_front(currentEdgeEnd);
 				}
 				//Otherwise if the g score is less than the node at the end of the edge's g score...
-				else if(gScore < currentEdgeEnd->edges[i]->getCost())
+				else if(gScore < currentEdgeEnd->getGScore())
 				{
 					//Mark the node as visited by changing its color
 					currentEdgeEnd->color = ColorToInt(RED);
+					currentEdgeEnd->visited = true;
 					//Set its g score to be the g score calculated earlier
 					currentEdgeEnd->edges[i]->setCost(gScore);
 					//Set its previous to be the current node
@@ -217,7 +207,6 @@ void Graph::Dijkstra(int startX, int startY, int goalX, int goalY)
 		}
 		//end loop
 	}
-
 	//end loop
 }
 
@@ -238,26 +227,37 @@ Node* Graph::getNode(int xPos, int yPos)
 	return nullptr;
 }
 
-void Graph::addNodeToList(Node* node)
+std::deque<Node*> Graph::sort(std::deque<Node*> deque)
 {
-
+	//Bubble sort
+	for (int i = 0; i < deque.size(); i++)
+	{
+		for (int j = deque.size() - 1; j > i; j--)
+		{
+			if (deque[j] < deque[j - 1])
+			{
+				Node* temp = deque[j];
+				deque[j] = deque[j - 1];
+				deque[j - 1] = temp;
+			}
+		}
+	}
+	return deque;
 }
 
-//void Graph::sort(Node* list)
-//{
-//	for (int i = 0; i < m_nodes.size(); i++)
-//	{
-//		for (int j = m_nodes.size() - 1; j > i; j--)
-//		{
-//			if ()
-//			{
-//				Node temp = list[j];
-//				list[j] = list[j - 1];
-//				list[j - 1] = temp;
-//			}
-//		}
-//	}
-//}
+bool Graph::checkDeque(std::deque<Node*> deque, Node* node)
+{
+	//For the size of a deque, check deque at the index of i. 
+	for (int i = 0; i < deque.size(); i++)
+	{
+		//if deque at the index of i is equal to node, return true.
+		if (deque[i] == node)
+		{
+			return true;
+		}
+	}
+	return false;
+}
 
 void Graph::createGraph(int nodeSize, int nodeSpacing)
 {

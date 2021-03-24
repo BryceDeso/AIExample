@@ -25,5 +25,4 @@ void ABDecisions::makeDecision(Agent* agent, float deltaTime)
 			m_rightChild->makeDecision(agent, deltaTime);
 		}
 	}
-
 }

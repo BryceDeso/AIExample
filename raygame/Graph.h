@@ -1,6 +1,7 @@
 #pragma once
 #include "Actor.h"
 #include <vector>
+#include <deque>
 
 class Node;
 
@@ -14,8 +15,8 @@ public:
 	void BFS(int startX, int startY, int goalX, int goalY);
 	void Dijkstra(int startX, int startY, int goalX, int goalY);
 	Node* getNode(int xPos, int yPos);
-	void addNodeToList(Node* node);
-	void sort(Node* list);
+	std::deque<Node*> sort(std::deque<Node*> list);
+	bool checkDeque(std::deque<Node*> deque, Node* node);
 	
 private:
 	void createGraph(int nodeSize, int nodeSpacing);
