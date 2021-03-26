@@ -170,6 +170,7 @@
     <ClCompile Include="SimpleEnemy.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="WanderBehavior.cpp" />
+    <ClCompile Include="WanderDecision.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ABDecisions.h" />
@@ -198,6 +199,7 @@
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SteeringBehavior.h" />
     <ClInclude Include="WanderBehavior.h" />
+    <ClInclude Include="WanderDecision.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Images\bullet.png" />

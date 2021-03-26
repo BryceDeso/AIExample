@@ -10,6 +10,7 @@
 #include "ArriveBehavior.h"
 #include "DecisionBehavior.h"
 #include "PursuitDecision.h"
+#include "WanderDecision.h"
 #include "ComplexEnemy.h"
 #include "SimpleEnemy.h"
 #include "Graph.h"
@@ -53,7 +54,9 @@ void Game::start()
 	PursuitBehavior* pursuit = new PursuitBehavior(player, 10);
 	EvadeBehavior* evade = new EvadeBehavior(player, 0.1f);
 	PursuitDecision* pursuitDecision = new PursuitDecision();
-	DecisionBehavior* decisionBehavior = new DecisionBehavior(pursuitDecision);
+	WanderDecision* wanderDecision = new WanderDecision();
+	ABDecisions* ABdecisionBehavior = new ABDecisions(pursuitDecision, wanderDecision);
+	DecisionBehavior* decisionBehavior = new DecisionBehavior(ABdecisionBehavior);
 
 	complexEnemy->addBehavior(decisionBehavior);
 

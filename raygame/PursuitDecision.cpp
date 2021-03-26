@@ -10,6 +10,5 @@ void PursuitDecision::makeDecision(Agent* agent, float deltaTime)
 	{
 		enemy->getPursuit()->setEnabled(true);
 		enemy->getWander()->setEnabled(false);
-		enemy->getEvade()->setEnabled(false);
 	}
 }

@@ -3,7 +3,7 @@
 class Agent;
 
 ///<summery>
-///Abstract class for a all decisions.
+///Abstract class for all decisions.
 ///<summary
 class Decision
 {
