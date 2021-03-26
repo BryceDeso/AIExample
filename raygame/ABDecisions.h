@@ -23,4 +23,3 @@ private:
 	Decision* m_leftChild;
 	Decision* m_rightChild;
 };
-
